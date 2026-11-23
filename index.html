@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#050817">
+  <meta name="description" content="THE LAST SERVER — uma aventura futurista de conhecimento, lógica e segurança digital.">
+  <title>THE LAST SERVER | Protocolo 2077</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <!-- INTRODUÇÃO CINEMATOGRÁFICA: cinco cenas de aproximadamente 12 segundos -->
+  <section id="cinematicIntro" class="cinematic-intro" aria-label="Introdução cinematográfica">
+    <div class="intro-scene-image" id="introSceneImage"></div>
+    <div class="intro-stars"></div><div class="intro-glitch"></div>
+    <div class="intro-content">
+      <div class="intro-kicker">TRANSMISSÃO DE EMERGÊNCIA // ANO 2077</div>
+      <div class="intro-symbol">◈</div>
+      <span id="introSceneLabel" class="intro-scene-label">ARQUIVO 01 // CONEXÃO</span>
+      <h1 id="introTitle">CONEXÃO ESTABELECIDA</h1>
+      <p id="introMessage">Inicializando a rede mundial...</p>
+      <div class="intro-progress"><span id="introProgress"></span></div>
+      <small id="introCounter">SINAL 01 / 05</small>
+    </div>
+    <div class="intro-controls"><button class="intro-audio" id="introAudio" type="button">♫ ATIVAR TRILHA SONORA</button><button class="intro-skip" id="skipIntro" type="button">PULAR INTRODUÇÃO »</button></div>
+  </section>
+
+  <!-- BRIEFING HOLOGRÁFICO ANTES DE CADA SETOR -->
+  <div id="missionModal" class="mission-modal" aria-hidden="true">
+    <div class="mission-backdrop"></div>
+    <section class="mission-card" role="dialog" aria-modal="true" aria-labelledby="missionTitle">
+      <div class="mission-scan"></div>
+      <div class="mission-topline"><span>◈ TRANSMISSÃO DO SISTEMA</span><span id="missionPhase">FASE 01</span></div>
+      <div class="mission-image" id="missionImage"></div>
+      <span class="eyebrow">NOVA MISSÃO DETECTADA</span>
+      <h2 id="missionTitle">CIDADE DOS SERVIDORES</h2>
+      <p id="missionDescription">Recupere os dados perdidos.</p>
+      <div class="mission-objectives"><strong>OBJETIVOS</strong><ul id="missionObjectives"></ul></div>
+      <div class="mission-reward"><span>RECOMPENSA</span><strong id="missionReward">CHAVE DIGITAL + XP</strong></div>
+      <button class="main-button full-button" id="startMission" type="button">INICIAR MISSÃO ➜</button>
+      <button class="mission-close" id="closeMission" type="button">VOLTAR AO MAPA</button>
+    </section>
+  </div>
+
+  <!-- BAÚ SECRETO -->
+  <div id="secretModal" class="secret-modal" aria-hidden="true">
+    <div class="secret-backdrop"></div>
+    <section class="secret-card" role="dialog" aria-modal="true">
+      <div class="secret-chest">▣</div>
+      <span class="eyebrow">SINAL OCULTO LOCALIZADO</span>
+      <h2>BAÚ DE DADOS SECRETOS</h2>
+      <p>Você encontrou uma reserva escondida pelos antigos operadores.</p>
+      <div class="secret-reward">+250 XP <span>•</span> +1 KIT DE REPARO</div>
+      <button class="main-button full-button" id="claimSecret" type="button">ABRIR BAÚ ➜</button>
+    </section>
+  </div>
+
+  <div class="background-art" aria-hidden="true"></div>
+  <div class="background-grid" aria-hidden="true"></div>
+  <div class="scanlines" aria-hidden="true"></div>
+  <div class="particles" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+
+  <header class="topbar">
+    <a class="brand" href="#home" id="brandHome" aria-label="The Last Server"><span class="brand-symbol">◈</span><span>THE LAST <strong>SERVER</strong></span></a>
+    <div class="top-status"><span class="status-dot"></span>SISTEMA INSTÁVEL <span class="top-divider">/</span> PROTOCOLO 2077</div>
+    <div class="player-hud">
+      <div class="hud-item"><span>OPERADOR</span><strong id="levelLabel">NÍVEL 1</strong></div>
+      <div class="hud-item xp-hud"><span>EXPERIÊNCIA</span><strong id="xp">0 XP</strong><div class="mini-xp-track"><i id="miniXpBar"></i></div></div>
+      <div class="hud-item health-hud"><span>ENERGIA</span><strong id="healthLabel">♥ ♥ ♥ ♥ ♥</strong></div>
+      <button id="soundToggle" class="sound-toggle" type="button" aria-label="Alternar sons" title="Alternar sons">♫</button>
+    </div>
+  </header>
+
+  <main>
+    <!-- TELA INICIAL -->
+    <section id="home" class="screen active">
+      <div class="home-layout">
+        <div class="hero-copy">
+          <div class="eyebrow"><span class="status-dot"></span> ALERTA GLOBAL // ÚLTIMA TRANSMISSÃO</div>
+          <p class="hero-kicker">A HUMANIDADE PRECISA DE VOCÊ</p>
+          <h1>THE LAST<br><span>SERVER</span></h1>
+          <p class="hero-subtitle">No ano de 2077, uma inteligência artificial desconhecida invadiu a rede mundial. Os cinco núcleos que mantêm os sistemas da humanidade foram corrompidos. Você é o último operador com acesso ao servidor central.</p>
+          <p class="story-line">Sua missão: atravessar cinco setores, recuperar as chaves digitais, encontrar arquivos secretos e enfrentar a IA que controla o sistema.</p>
+          <div class="hero-actions"><button class="main-button" id="playButton" type="button">INICIAR MISSÃO <span>➜</span></button><span class="micro-copy">05 SETORES // 01 CHEFÃO // 01 SERVIDOR</span></div>
+          <div class="hero-stats"><div><strong>05</strong><span>NÚCLEOS</span></div><div><strong>20</strong><span>DESAFIOS</span></div><div><strong>2077</strong><span>ANO DO COLAPSO</span></div></div>
+        </div>
+        <div class="hero-visual">
+          <div class="visual-frame"><div class="visual-corner corner-a"></div><div class="visual-corner corner-b"></div><div class="orbit orbit-a"></div><div class="orbit orbit-b"></div><div class="core-beam"></div><div class="core-sphere"><span>✧</span></div><div class="visual-label label-top">CORE SYSTEM <b>● INSTÁVEL</b></div><div class="visual-label label-bottom">ENERGIA CRÍTICA <b>12.7%</b></div></div>
+          <div class="floating-tag tag-left">◈ SINAL DETECTADO</div><div class="floating-tag tag-right">/// ACESSO RESTRITO</div>
+          <div class="operator-card"><div class="operator-avatar">◉</div><div><span>PERSONAGEM // OPERADOR</span><strong>ÚLTIMA ESPERANÇA</strong><small>Classe: Restaurador de Sistemas</small></div></div>
+        </div>
+      </div>
+      <div class="home-warning"><span>!</span><p><b>AVISO DO SISTEMA:</b> responda aos desafios de conhecimentos gerais e informática. As perguntas ficam mais difíceis a cada etapa. Guarde energia, use seus kits e procure os sinais secretos.</p></div>
+      <div class="save-note" id="saveNote">◈ O progresso é salvo automaticamente neste navegador.</div>
+    </section>
+
+    <!-- MAPA, PROGRESSO E INVENTÁRIO -->
+    <section id="map" class="screen">
+      <div class="section-heading"><div><span class="eyebrow">CENTRAL DE OPERAÇÕES // 01</span><h2>MAPA DE <span>MISSÕES</span></h2><p>Explore os setores conectados e restaure a rede mundial.</p></div><div class="key-counter"><span>CHAVES RECUPERADAS</span><strong id="keys">0/5</strong><span class="key-icon">⚿</span></div></div>
+      <div class="inventory-bar">
+        <div class="inventory-title"><span>▣</span><div><b>INVENTÁRIO DO OPERADOR</b><small>RECURSOS RECUPERADOS</small></div></div>
+        <div class="inventory-item"><span class="inventory-symbol key-symbol">⚿</span><span>CHAVES</span><strong id="inventoryKeys">0</strong></div>
+        <div class="inventory-item"><span class="inventory-symbol shard-symbol">✧</span><span>FRAGMENTOS</span><strong id="inventoryShards">0</strong></div>
+        <div class="inventory-item"><span class="inventory-symbol kit-symbol">✚</span><span>KITS</span><strong id="inventoryKits">1</strong></div>
+        <div class="inventory-item"><span class="inventory-symbol level-symbol">⬆</span><span>NÍVEL</span><strong id="inventoryLevel">1</strong></div>
+      </div>
+      <div class="progress-area"><div class="progress-label"><span>RESTAURAÇÃO DO SISTEMA</span><strong id="progressText">0%</strong></div><div class="progress-track"><div id="progressBar" class="progress-fill"></div></div></div>
+      <div class="map-intro"><span class="map-pulse"></span> REDE DE NÚCLEOS // SELECIONE UM SETOR DISPONÍVEL</div>
+      <div class="map-canvas">
+        <div class="map-heading"><span>◈ REDE DE EXPLORAÇÃO</span><span>COORDENADAS // 2077</span></div>
+        <svg class="map-paths" viewBox="0 0 1000 540" preserveAspectRatio="none" aria-hidden="true"><path d="M130 110 Q250 40 340 160 T550 180 T850 100" class="path-line"/><path d="M130 110 Q200 300 370 330 T550 180 Q700 300 850 410" class="path-line"/><path d="M340 160 Q330 260 370 330" class="path-line"/><path d="M550 180 Q700 100 850 100" class="path-line"/><path d="M370 330 Q600 440 850 410" class="path-line"/></svg>
+        <div id="sectorList" class="sector-grid map-grid"></div>
+        <div class="map-legend"><span>● DISPONÍVEL</span><span>◆ CONCLUÍDO</span><span>🔒 BLOQUEADO</span></div>
+      </div>
+      <div class="secret-unlock" id="secretUnlock"><div><span class="eyebrow">FREQUÊNCIA OCULTA DETECTADA</span><h3>BAÚ DE DADOS SECRETOS</h3><p>Você reuniu fragmentos suficientes para localizar um esconderijo.</p></div><button class="secondary-button" id="findSecretButton" type="button">LOCALIZAR BAÚ ◈</button></div>
+      <div class="final-unlock" id="finalUnlock"><div><span class="eyebrow">ÚLTIMA ETAPA // ACESSO LIBERADO</span><h3>ENTIDADE ZERO</h3><p>Os cinco núcleos estão restaurados. A inteligência artificial está esperando por você.</p></div><button class="main-button" id="bossButton" type="button">ENFRENTAR A IA ➜</button></div>
+    </section>
+
+    <!-- PERGUNTAS -->
+    <section id="quiz" class="screen">
+      <div class="quiz-top"><button class="back-button" id="backMapButton" type="button">← MAPA</button><span id="questionSector">SETOR 01</span><span id="questionNumber">PERGUNTA 1/4</span></div>
+      <div class="quiz-layout">
+        <aside class="quiz-aside"><div class="aside-emblem">⌘</div><span class="eyebrow">TERMINAL DE ACESSO</span><h3>DECODIFIQUE<br>O SISTEMA</h3><p>Escolha uma resposta. Cada acerto recupera dados; cada erro consome energia do operador.</p><div class="aside-line"></div><span class="aside-code">SYS//2077<br>ENCRYPTION: ACTIVE</span><div class="quiz-energy"><span>ENERGIA ATUAL</span><strong id="quizHealth">♥ ♥ ♥ ♥ ♥</strong></div><button class="repair-button" id="useKitButton" type="button">✚ USAR KIT (+2)</button></aside>
+        <div class="quiz-panel"><div class="quiz-decoration"><span class="eyebrow" id="difficulty">NÍVEL FÁCIL</span><span class="question-progress" id="questionProgress">01 — 04</span></div><div class="quiz-line"></div><h2 id="questionTitle">Carregando pergunta...</h2><div id="options" class="options-grid"></div><div id="feedback" class="feedback" aria-live="polite"></div><button id="nextButton" class="main-button next-button" type="button" disabled>PRÓXIMA PERGUNTA ➜</button></div>
+      </div>
+    </section>
+
+    <!-- RESULTADO DE CADA SETOR -->
+    <section id="result" class="screen"><div class="result-panel"><div class="result-icon" id="resultIcon">✦</div><span class="eyebrow">RELATÓRIO DA MISSÃO // RESULTADO</span><h2 id="resultTitle">MISSÃO CONCLUÍDA</h2><p id="resultMessage"></p><div class="result-score"><span>SEU RESULTADO</span><strong id="resultScore">0/4</strong></div><div id="keyReward" class="key-reward">◈ CHAVE DIGITAL RECUPERADA</div><div id="secretReward" class="secret-reward-line"></div><button id="resultButton" class="main-button" type="button">VOLTAR AO MAPA ➜</button></div></section>
+
+    <!-- BATALHA FINAL -->
+    <section id="boss" class="screen">
+      <div class="boss-heading"><span class="eyebrow">PROTOCOLO FINAL // AMEAÇA DETECTADA</span><h2>ENTIDADE <span>ZERO</span></h2><p>A inteligência artificial que corrompeu os cinco núcleos está diante de você.</p></div>
+      <div class="boss-arena">
+        <div class="boss-art-wrap"><img src="imagens/chefao-ia.webp" alt="Entidade Zero, inteligência artificial corrompida" class="boss-art"><div class="boss-warning">NÍVEL DE AMEAÇA: CRÍTICO</div></div>
+        <div class="boss-battle-panel"><div class="boss-health-title"><span>VIDA DA ENTIDADE ZERO</span><strong id="bossHealthText">5 / 5</strong></div><div class="boss-health-track"><div id="bossHealthBar" class="boss-health-fill"></div></div><div class="boss-vs">OPERADOR <b>VS</b> IA ZERO</div><div class="boss-question-label" id="bossQuestionNumber">DESAFIO 1 DE 5</div><h3 id="bossQuestion">Carregando protocolo de defesa...</h3><div id="bossOptions" class="options-grid boss-options"></div><div id="bossFeedback" class="feedback" aria-live="polite"></div><button id="bossNextButton" class="main-button" type="button" disabled>PRÓXIMO ATAQUE ➜</button><div class="boss-player-health">SUA ENERGIA: <strong id="bossPlayerHealth">♥ ♥ ♥ ♥ ♥</strong></div><button class="repair-button boss-repair" id="bossUseKitButton" type="button">✚ USAR KIT (+2)</button></div>
+      </div>
+    </section>
+
+    <!-- VITÓRIA -->
+    <section id="victory" class="screen"><div class="victory-panel"><div class="victory-symbol">✧</div><span class="eyebrow">PROTOCOLO RESTAURADO // TRANSMISSÃO GLOBAL</span><h1>VOCÊ SALVOU<br><span>O SERVIDOR!</span></h1><p>A Entidade Zero foi derrotada. A humanidade voltou a ter acesso à rede mundial. Sua missão entrou para a história.</p><div class="victory-stats" id="victoryStats"></div><button class="main-button" id="restartButton" type="button">JOGAR NOVAMENTE ↻</button></div></section>
+
+    <!-- DERROTA -->
+    <section id="defeat" class="screen"><div class="defeat-panel"><div class="defeat-symbol">⚠</div><span class="eyebrow">SINAL PERDIDO // SISTEMA EM COLAPSO</span><h1>CONEXÃO<br><span>INTERROMPIDA</span></h1><p id="defeatMessage">Sua energia acabou. O servidor ainda pode ser recuperado.</p><div class="defeat-preserve">SETORES CONCLUÍDOS E CHAVES RECUPERADAS CONTINUAM SALVOS.</div><button class="main-button" id="retryButton" type="button">REINICIAR TENTATIVA ↻</button><button class="text-button" id="defeatMapButton" type="button">VOLTAR AO MAPA</button></div></section>
+
+    <!-- CELEBRAÇÃO DA CHAVE -->
+    <div id="keyCelebration" class="key-celebration" aria-hidden="true"><div class="celebration-flash"></div><div class="celebration-content"><div class="key-rays"></div><div class="giant-key">⚿</div><span class="eyebrow">ACESSO AUTORIZADO // NÚCLEO RESTAURADO</span><h2>CHAVE <span>RECUPERADA!</span></h2><p>Um novo fragmento do servidor está em suas mãos.</p><div class="key-xp">+200 XP</div><button class="main-button" id="continueAfterKey" type="button">CONTINUAR MISSÃO ➜</button></div></div>
+  </main>
+  <footer><span>THE LAST SERVER © 2077</span><span>DESENVOLVIDO PARA O FUTURO <b>◈</b></span></footer>
+</body>
+</html>
